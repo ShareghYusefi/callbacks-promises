@@ -23,7 +23,7 @@ function getUser(id, callbackFunctionToCalled) {
   }, 500);
 }
 
-// A callback function takes the result of an asynchronous operation and does something with it.
+// *** A callback function takes the result of an asynchronous operation and does something with it. ***
 // In this case, we are passing a function that takes a user object and logs it to the console.
 getUser(1, (user) => {
   console.log("User: ", user);
@@ -60,3 +60,41 @@ step1(() => {
     });
   });
 });
+
+// What is a Promise?
+// A promise is an object that represents the eventual completion (or failture) of an asynchronous operation.
+// A primise can be in one of three states: pending, fulfilled, or rejected.
+// A new promise starts off in a pending state.
+
+console.log("Before Promise");
+
+function getUserPromise(id) {
+  return new Promise((resolve, reject) => {
+    // Simulate a database call using setTimeout
+    setTimeout(() => {
+      // mock database call
+      console.log("Retrieving user with id: " + id);
+      // get user from database
+      var user = { id: id, githubUsername: "ShareghYusefi" };
+
+      // if we have a user
+      if (user) {
+        // we resolve the promise and return the user object -> fulfilled
+        resolve(user);
+      } else {
+        // else we reject the promise -> rejected
+        reject(new Error("User not found."));
+      }
+    }, 4000);
+  });
+}
+
+getUserPromise(2)
+  .then((user) => {
+    console.log("User: ", user);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+console.log("After Promise");
