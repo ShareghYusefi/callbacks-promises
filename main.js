@@ -20,7 +20,7 @@ function getUser(id, callbackFunctionToCalled) {
     var user = { id: id, githubUsername: "ShareghYusefi" };
     // Once we have our user from the database, we call the callback function and give it the result for processing.
     callbackFunctionToCalled(user);
-  }, 2000);
+  }, 500);
 }
 
 // A callback function takes the result of an asynchronous operation and does something with it.
@@ -29,3 +29,34 @@ getUser(1, (user) => {
   console.log("User: ", user);
 });
 console.log("After");
+
+// What is callback hell?
+// Callback hell is when you have multiple nested callback functions.
+function step1(callback) {
+  setTimeout(() => {
+    console.log("Step 1 Complete.");
+    callback();
+  }, 1000);
+}
+
+function step2(callback) {
+  setTimeout(() => {
+    console.log("Step 2 Complete.");
+    callback();
+  }, 1000);
+}
+
+function step3(callback) {
+  setTimeout(() => {
+    console.log("Step 3 Complete.");
+    callback();
+  }, 1000);
+}
+
+step1(() => {
+  step2(() => {
+    step3(() => {
+      console.log("All Steps completed!");
+    });
+  });
+});
