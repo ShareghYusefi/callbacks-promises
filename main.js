@@ -64,3 +64,43 @@ step1(() => {
     });
   });
 });
+
+// What is a Promise?
+// A promise is an object that represents the eventual completion (or failure) of an asynchronous operation.
+// A promise can be in one of three states: pending(initial state), fulfilled, rejected.
+
+console.log("Before Promise");
+
+function getUserPromise(id) {
+  return new Promise((resolve, reject) => {
+    // Simulate database call
+    // setTimeout is a function that operates asynchronously
+    setTimeout(() => {
+      // mock database call
+      console.log("Retrieving user with id: " + id);
+      // get user from the database
+      var user = {
+        id: id,
+        githubUsername: "ShareghYusefi",
+      };
+      // if we have a user
+      if (user) {
+        // we resolve the promise and return the user object -> fulfilled
+        resolve(user);
+      } else {
+        // we reject the promise -> rejected
+        reject(new Error("User not found."));
+      }
+    }, 4000);
+  });
+}
+
+getUserPromise(2)
+  .then((user) => {
+    console.log(user);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+console.log("After Promise");
