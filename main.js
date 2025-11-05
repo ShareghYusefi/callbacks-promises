@@ -103,4 +103,47 @@ getUserPromise(2)
     console.log(error);
   });
 
+// What is Promise Chaining?
+// It is a technique used to resolve the callback hell problem.
+
 console.log("After Promise");
+
+console.log("Before Promise Chaining");
+
+function step1Promise() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("Step 1 Promise Complete.");
+      resolve();
+    }, 1000);
+  });
+}
+function step2Promise() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("Step 2 Promise Complete.");
+      resolve();
+    }, 1000);
+  });
+}
+function step3Promise() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("Step 3 Promise Complete.");
+      resolve();
+    }, 1000);
+  });
+}
+
+// We can respond to fulfilled or rejected states by chaining .then and finally catching failure with a single .catch
+step1Promise() // return a promise object
+  .then(step2Promise) // step2Promise returns another promise object
+  .then(step3Promise) // step3Promise returns another promise object
+  .then(() => {
+    console.log("All Promise steps Completed!");
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+console.log("End Promise Chaining");
