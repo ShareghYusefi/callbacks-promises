@@ -95,6 +95,7 @@ function getUserPromise(id) {
   });
 }
 
+// 1. Tranditional way of calling a function that returns a promise
 getUserPromise(2)
   .then((user) => {
     console.log(user);
@@ -147,3 +148,23 @@ step1Promise() // return a promise object
   });
 
 console.log("End Promise Chaining");
+
+// Async/Await
+// This is a modern syntax for working with promises.
+// Async functions are functions that return a promise.
+
+// 2. Using Async/Await to call a function that returns a
+// async keyword is used to define asynchronous function
+async function displayUser(id) {
+  // try block replaces the .then method
+  try {
+    // We can get the result from the promise using the await keyword and store it into a variable
+    const user = await getUserPromise(id);
+    console.log("User: ", user);
+  } catch (error) {
+    // catch block is used to replace .catch method
+    console.log("Error fetching user", error);
+  }
+}
+
+displayUser(3);
